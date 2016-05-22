@@ -1,9 +1,12 @@
 @extends('staff')
 @section('css')
+<script type="text/javascript" language="javascript" src="/addons/js/jquery.dataTables.js"></script>
+     <script src="/addons/js/bootstrap.js"></script>
+
 <script type="text/javascript">
     $(document).ready(function(){
         $('[data-toggle="popover"]').popover();
-
+        $('.nav').children('li:nth-child(2)').addClass('active');
     });
 </script>
 @stop
@@ -13,8 +16,9 @@
             <center><h3 style="color: #ffffff;"><b>A D D &nbsp;&nbsp; A T H L E T E</b></h3></center>
         </div>
     </div>
-
-    <br/><br/>
+    <br/>
+            <h5><b style="cursor:pointer;" title="" data-toggle="popover" data-trigger="hover" data-content="Go back to athlete's list"><a href="{{route('adminviewAthlete')}}"><span class="glyphicon glyphicon-home"></span> Home </a></b>&nbsp;&nbsp; > &nbsp;&nbsp; <span class="glyphicon glyphicon-plus-sign"></span>&nbsp;<u>Add Athlete</u> </h5>
+    <br/>
 <div class="row panel">
     <h4>&nbsp;&nbsp;&nbsp;<b><span class="glyphicon glyphicon-save"></span></b>&nbsp;Athlete Creation</h4>
     <h5>&nbsp;&nbsp;&nbsp;<b id="step1" style="cursor:pointer;color:#0b2644;" data-toggle="popover" title="" data-trigger="hover" data-content="Fill up the athletes profile">Step 1</b>&nbsp;&nbsp;&nbsp; >&nbsp;&nbsp;&nbsp; <b id="step2" href="@if(Session::has('addAthlete')){{route('adminAddAthlete2')}}@endif" style="cursor:pointer;"  data-toggle="popover" title="" data-trigger="hover" data-content="Fill up the athletes credentials as a user">Step 2</b></h5>
@@ -54,7 +58,7 @@
     <!--row-->
     <div class="row">
     <div class="col-sm-6">
-    <input type="date" class="form-control" name="birth_day" value="@if(Session::has('addAthlete')){{Session::get('addAthlete')->birth_day}}@else {{old('birth_day')}}@endif"/>
+    <input type="date" class="form-control" name="birth_day" value="@if(Session::has('addAthlete')){{Session::get('addAthlete')->birth_day}}@else{{old('birth_day')}}@endif"/>
     </div>
     <div class="col-sm-6">
     <input type="text" class="form-control" placeholder="Birth Place" name="birth_place" value="@if(Session::has('addAthlete')){{Session::get('addAthlete')->birth_place}}@else{{old('birth_place')}}@endif"/>
@@ -135,9 +139,20 @@
     </div>
     <div class="row">
     <div class="col-sm-12">
-      Picture
+
      <input type="hidden" name="MAX_FILE_SIZE" value="2500000000000"/>
-    <input type="file" name="profile_pic" class="form-control" value="{{old('profile_pic')}}"/>
+      <b>Profile Picture: </b>
+                                                        <div class="controls">
+                                                                                                                <div class="fileupload fileupload-new" data-provides="fileupload"><input type="hidden" value="" name="">
+                                                                                                                    <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;"><img src="/sys_files/img/user.jpg"></div>
+                                                                                                                    <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
+                                                                                                                    <div>
+                                                                                                                        <span class="btn btn-file"><span class="fileupload-new">Select image</span><span class="fileupload-exists">Change</span> <input type="file" name="profile_pic" class="form-control" value="{{old('profile_pic')}}"/></span>
+                                                                                                                        <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
+                                                                                                                    </div>
+
+                                                    </div>
+
     </div><hr>
     </div>
     <div class="row">
@@ -161,7 +176,7 @@
     <input type="text" class="form-control" placeholder="Middle Name" name="father_middle_name" value="@if(Session::has('addAthlete')){{Session::get('addAthlete')->father_middle_name}}@else{{old('father_middle_name')}}@endif"/>
     </div>
     <div class="col-sm-3">
-    <input type="text" class="form-control" placeholder="NickName" name="father_nickname" value="@if(Session::has('addAthlete')){{Session::get('addAthlete')->father_nickname}}@else {{old('father_nickname')}}@endif"/>
+    <input type="text" class="form-control" placeholder="NickName" name="father_nickname" value="@if(Session::has('addAthlete')){{Session::get('addAthlete')->father_nickname}}@else{{old('father_nickname')}}@endif"/>
     </div><hr>
     </div>
     <div class="row">
@@ -403,10 +418,10 @@ Achievement
 Do you have any disciplinary action?
  <label class="radio-inline">
 
-      <input type="radio" @if(Session::has('addAthlete'))@if(Session::get('addAthlete')->sanction_no == 1) checked @endif @else checked @endif name="sanction_yes" value="1">Yes
+      <input type="radio" @if(Session::has('addAthlete'))@if(Session::get('addAthlete')->sanction_no == 1) checked @endif @else checked @endif name="sanction" value="1">Yes
     </label>
  <label class="radio-inline">
-      <input type="radio" name="sanction_no" @if(Session::has('addAthlete'))@if(Session::get('addAthlete')->sanction_no == 0) checked @endif @endif value="0">No
+      <input type="radio" name="sanction" @if(Session::has('addAthlete'))@if(Session::get('addAthlete')->sanction_no == 0) checked @endif @endif value="0">No
     </label>
 </div>
 <div class="col-sm-6">
@@ -461,10 +476,10 @@ Do you stay at dormitory?
 Do you go home during weekends?
  <label class="radio-inline">
 
-      <input type="radio" name="weekend_stay" value="1" @if(Session::has('addAthlete'))@if(Session::get('addAthlete')->weekend_stay == 1) checked @endif @else checked  @endif>Yes
+      <input type="radio" name="weekends_stay" value="1" @if(Session::has('addAthlete'))@if(Session::get('addAthlete')->weekend_stay == 1) checked @endif @else checked  @endif>Yes
     </label>
  <label class="radio-inline">
-      <input type="radio" name="weekend_stay" value="0" @if(Session::has('addAthlete'))@if(Session::get('addAthlete')->at_dormitory == 0) checked @endif @endif>No
+      <input type="radio" name="weekends_stay" value="0" @if(Session::has('addAthlete'))@if(Session::get('addAthlete')->at_dormitory == 0) checked @endif @endif>No
     </label>
 </div>
 <div class="col-sm-6">

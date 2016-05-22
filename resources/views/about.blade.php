@@ -11,6 +11,14 @@
     .on{
         background-color: #213978;
     }
+    #faq::-webkit-scrollbar{
+        width: 5px;
+        background-color: #0b2644;
+    }
+    #faq::-webkit-scrollbar-thumb{
+        background-color: #0080ff;
+    }
+
 </style>
 <script type="text/javascript">
     $(document).ready(function(){
@@ -55,7 +63,18 @@
                     </div>
                     </div>
               </div>
-              <div class="row panel" style="background-color: #68217a;margin-top: -20px;margin-bottom: 0px;">
+              <div class="row panel" id="faq" style="width:101%;background-color: #68217a;margin-top: -20px;margin-bottom: 0;max-height: 450px;overflow-x:hidden;overflow-y: scroll;">
                    <center> <h3 style="color:white;"><span class="glyphicon glyphicon-comment" style="color:#22cff6; "></span><b>F A Q</b> (Frequently Asked Questions)</h3></center>
+                   <hr style="border:2px solid #1496aa;"/>
+                   @foreach($faqList as $faq)
+                        <div class="row">
+                        <div class="col-sm-11 col-sm-offset-1"><h1 style="color:#80ffff;display:inline-block;">Q. </h1>&nbsp;&nbsp;&nbsp;<p style="color:white;display:inline-block;">{{$faq->question}}{{(strpos($faq->question,'?'))? '':'?'}}</p></div>
+                 </div>
+                      <div style="width: 92%;margin-left: 4%;">  <hr style="border-style: dashed;"/></div>
+                       <div class="row">
+                        <div class="col-sm-11 col-sm-offset-1"><h1 style="color:#00ff40;display:inline-block;">A. </h1>&nbsp;&nbsp;&nbsp;<p style="color:white;display:inline-block;">{{$faq->answer}}</p></div>
+                            </div>
+                                                <div style="width: 92%;margin-left: 4%;"><hr style="border: 1px solid #0b2644;"/></div>
+                   @endforeach
               </div>
 @stop

@@ -200,7 +200,7 @@ position: relative;
           </div>
      <hr style="border:1.5px solid #0b2644;"/>
      <div class="row">
-        <form id="form" class="form-group col-sm-7" method="post" action="{{route('addApplicant')}}" enctype="multipart/form-data">
+        <form id="form" class="form-group col-sm-8" method="post" action="{{route('addApplicant')}}" enctype="multipart/form-data">
         <input type="hidden" name="MAX_FILE_SIZE" value="2500000">
         <input type="hidden" name="pending" value=1>
                 <div class="panel panel-default ">
@@ -282,7 +282,7 @@ position: relative;
                 </div>
                 <div class="col-sm-6">
                 Blood Type
-                <select name="blood_type"class="form-control">
+                <select name="blood_type" class="form-control">
                  <option>A</option>
                   <option>B</option>
                    <option>AB</option>
@@ -305,9 +305,20 @@ position: relative;
                 </div>
                 <div class="row">
                 <div class="col-sm-12">
-                Picture:
                  <input type="hidden" name="MAX_FILE_SIZE" value="2500000000000000000"/>
-                <input type="file" name="profile_pic" class="form-control"/>
+                  <b>Profile Picture: </b>
+                                                                   <div class="controls">
+                                                                                                                           <div class="fileupload fileupload-new" data-provides="fileupload"><input type="hidden" value="" name="">
+                                                                                                                               <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;"><img src="/sys_files/img/user.jpg"></div>
+                                                                                                                               <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
+                                                                                                                               <div>
+                                                                                                                                   <span class="btn btn-file"><span class="fileupload-new">Select image</span><span class="fileupload-exists">Change</span>                <input type="file" name="profile_pic" class="form-control"/>
+</span>
+                                                                                                                                   <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
+                                                                                                                               </div>
+
+                                                               </div>
+                                                               </div>
                 <br/>
                 Youtube Video Link:(Optional for board games, video that shows you playing your sports for us to evaluate)
                 <input type="url" name="ytlink" class="form-control" placeholder="www.youtube.com/myvideo"/>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\blog;
+use App\faq;
 use Illuminate\Http\Request;
 use App\sport;
 use App\Http\Requests;
@@ -50,7 +51,8 @@ class home extends Controller
         return view('contact');
     }
     function about(){
-        return view('about');
+        $faqList = faq::get();
+        return view('about',compact('faqList'));
     }
     function sendMessage(Request $request){
         $validate =  Validator::make($request->all(),$this->rulesContact);
@@ -87,6 +89,7 @@ class home extends Controller
                 $request->file('profile_pic')->move('sys_files/img/profile_pic/applicant/',$in.'.jpg');
 
                 $t['profile_pic']=$in.'.jpg';
+                $t['created_at']=date('Y-m-d');
                 $applicant->insert($t);
                 return view('application',compact('ListOfSport'))->with('Added','Please check your email for notifications, thank you');
 
@@ -98,12 +101,13 @@ class home extends Controller
         $ListOfSport= $sport->get();
         return view('application',compact('ListOfSport'));
     }
-    function specificBlog($id){
+    function scificBlog($id){
         $Blog = new blog();
         $user = new users();
         $coach = new coach();
         $staff = new staff();
         $blogCon= $Blog->where('id',$id)->get();
+        if(count($blogCon) == 0) abort('404');
         $userType=($user->where('id',$blogCon[0]->user_id)->get(['type']));
         $uploaderInfo= ($userType[0]->type=='coach')? $coach->where('user_id',$blogCon[0]->user_id)->get(['firstname','surname','middlename','profile_pic']):$staff->where('user_id',$blogCon[0]->user_id)->get(['firstname','surname','middlename','profile_pic']);
         if(count($blogCon)==0) abort('404');

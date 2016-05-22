@@ -2846,7 +2846,7 @@
 		var language = settings.oLanguage;
 		var previousSearch = settings.oPreviousSearch;
 		var features = settings.aanFeatures;
-		var input = '<div class="input-group col-sm-3" ><input  aria-describedby="ss" type="search" class="'+classes.sFilterInput+' form-control"   /><div class="input-group-addon btn btn-primary" id="ss" ><span class="glyphicon glyphicon-search"></span></div></div>';
+		var input = '<div class="input-group col-sm-3" ><input  aria-describedby="ss" type="search" class="'+classes.sFilterInput+' form-control"   /><div class="input-group-addon btn btn-primary" id="ss" ><span class="glyphicon glyphicon-search"></span></div></div>  <hr style="border: 2px solid #0b2644;"/><br/>';
 
 		var str = language.sSearch;
 		str = str.match(/_INPUT_/) ?

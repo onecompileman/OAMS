@@ -26,6 +26,9 @@
  <link rel="stylesheet" type="text/css" href="/addons/css/bootstrap.css">
  <script src="/addons/js/jquery.js"></script>
  <script src="/addons/js/bootstrap.js"></script>
+  <link rel="stylesheet" href="/addons/css/jasny-bootstrap.min.css" />
+                 <link rel="stylesheet" href="/addons/css/jasny-bootstrap-responsive.min.css" />
+     <script src="/addons/js/jasny-bootstrap.js"></script>
  @yield('addons')
  <style>
  body{
@@ -127,7 +130,13 @@ background-color: #005599;
                 text-align: center;
                 margin-bottom: 10px;
 }
-
+body::-webkit-scrollbar{
+        width: 5px;
+        background-color: #1b1b1b;
+    }
+    body::-webkit-scrollbar-thumb{
+        background-color: #0080ff;
+    }
  </style>
  <script>
              $('document').ready(function(){

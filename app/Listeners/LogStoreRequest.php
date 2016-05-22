@@ -34,9 +34,9 @@ class LogStoreRequest
      */
     public function handle(EventExecuted $event)
     {
-        $logData=['model'=>$event->model,'action'=>$event->action,'user_id'=>$event->user,'created_at'=>date('Y-m-d'),'user_idTo'=>$event->receiver];
+        $logData=['model'=>$event->model,'action'=>$event->action,'user_id'=>$event->user,'created_at'=>date('Y-m-d h:i:s A'),'user_idTo'=>$event->receiver];
         $this->logreport->insert($logData);
         $staff_id=$this->staff->get(['id']);
-        foreach($staff_id as $sid) $this->logreportview->insert(['staff_id'=>$sid->id,'log_id'=>($this->logreport->count())-1]);
+        foreach($staff_id as $sid) $this->logreportview->insert(['staff_id'=>$sid->id,'log_id'=>($this->logreport->max('id'))]);
     }
 }

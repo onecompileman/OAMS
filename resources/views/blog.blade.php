@@ -7,7 +7,6 @@
         .post{
                     background-color:rgba(255,255,255,0.7);
                     position: relative;
-                    left: 25%;
                     padding: 30px;
                     margin-bottom: -100px;
                 }
@@ -47,7 +46,7 @@ background-color: #005599;
                 margin-bottom: 10px;
 }
 #figure{
-box-shadow: 0 0 8px 8px rgba(0,0,0,0.6);
+box-shadow: 0 0 3px 3px rgba(0,0,0,0.6);
 }
  </style>
 </head>
@@ -61,7 +60,7 @@ box-shadow: 0 0 8px 8px rgba(0,0,0,0.6);
         </div>
     </div>
     <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-10 col-md-offset-1">
            @foreach($blogCon as $blog)
                          <div class="post">
                          <center> <h1 class="postHead"><b>{{$blog->title}}</b></h1></center>
